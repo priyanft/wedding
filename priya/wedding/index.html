@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Wedding Invitation</title>
+  <meta name="description" content="You're invited to our wedding" />
+  <meta property="og:title" content="You're invited 💍" />
+  <meta property="og:image" content="photos/hero.jpg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Great+Vibes&family=Montserrat:wght@300;500&family=Pacifico&family=Monoton&family=Fredoka:wght@400;600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="shared/decor.css" />
+  <link rel="stylesheet" href="site/style.css" />
+</head>
+<body class="locked">
+  <canvas id="petals" aria-hidden="true"></canvas>
+
+  <!-- Opening gate: two doors part when the guest taps -->
+  <div id="gate">
+    <div class="door left"></div>
+    <div class="door right"></div>
+    <div class="gate-center">
+      <div class="seal" data-monogram></div>
+      <p class="gate-to">You are cordially invited</p>
+      <button id="open">Open Invitation</button>
+    </div>
+  </div>
+
+  <header id="hero">
+    <div class="hero-bg"><img data-src="hero" alt="" /></div>
+    <div class="bars"><i></i><i></i></div>
+    <!-- names sit above the couple, details below, so faces stay clear -->
+    <div class="hero-text top">
+      <p class="eyebrow" data-k="intro"></p>
+      <h1 class="names">
+        <span data-k="bride"></span>
+        <em>&amp;</em>
+        <span data-k="groom"></span>
+      </h1>
+    </div>
+    <div class="hero-text bottom">
+      <p class="sub" data-k="invite"></p>
+      <p class="date" data-k="dateText"></p>
+      <p class="city" data-k="city"></p>
+    </div>
+    <div class="scroll-hint">scroll</div>
+  </header>
+
+  <section id="countdown" class="panel">
+    <h2>Counting down to forever</h2>
+    <div class="clock">
+      <div><b id="cd-d">0</b><span>Days</span></div>
+      <div><b id="cd-h">0</b><span>Hours</span></div>
+      <div><b id="cd-m">0</b><span>Minutes</span></div>
+      <div><b id="cd-s">0</b><span>Seconds</span></div>
+    </div>
+  </section>
+
+  <section id="story" class="panel">
+    <h2>Our Story</h2>
+    <div class="story-list"></div>
+  </section>
+
+  <section id="gallery">
+    <div class="gallery-track">
+      <h2 class="gallery-title">Moments</h2>
+    </div>
+  </section>
+
+  <!-- Overview: a timeline that draws itself as you scroll -->
+  <section id="weekend" class="panel">
+    <h2>The Wedding Weekend</h2>
+    <p class="section-sub">Two days · three celebrations · one forever</p>
+    <div class="timeline"><div class="tl-line"><i></i></div><div class="tl-stops"></div></div>
+  </section>
+
+  <!-- One full-screen chapter per celebration, built from config.js events -->
+  <div id="celebrations"></div>
+
+  <section id="venue" class="panel">
+    <h2>The Venue</h2>
+    <p class="venue-name"></p>
+    <p class="venue-addr"></p>
+    <div class="map"><iframe loading="lazy" title="Venue map"></iframe></div>
+    <a class="btn" target="_blank" rel="noopener" id="directions">Get Directions</a>
+  </section>
+
+  <section id="know" class="panel">
+    <h2>Good to Know</h2>
+    <div class="faq"></div>
+  </section>
+
+  <section id="rsvp" class="panel">
+    <h2>Will you join us?</h2>
+    <p class="rsvp-note"></p>
+    <form id="rsvp-form">
+      <input name="name" placeholder="Your name" required />
+      <select name="coming">
+        <option>Joyfully accepts</option>
+        <option>Regretfully declines</option>
+      </select>
+      <input name="guests" type="number" min="1" max="10" value="1" aria-label="Number of guests" />
+      <textarea name="note" rows="3" placeholder="A wish for the couple (optional)"></textarea>
+      <button class="btn" type="submit">Send RSVP on WhatsApp</button>
+    </form>
+  </section>
+
+  <section id="share" class="panel">
+    <p class="share-eyebrow">Share the love</p>
+    <button class="share-tag" type="button" aria-label="Copy hashtag"><span data-k="hashtag"></span><small>Tap to copy</small></button>
+    <p class="share-note">Tag your photos and stories so we can relive every moment.</p>
+  </section>
+
+  <footer>
+    <div class="seal small" data-monogram></div>
+  </footer>
+
+  <button id="music" aria-label="Toggle music" hidden>♪</button>
+  <audio id="audio" loop preload="auto"></audio>
+
+  <script src="config.js"></script>
+  <script src="shared/placeholder.js"></script>
+  <script src="shared/celebrate.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="site/site.js"></script>
+</body>
+</html>

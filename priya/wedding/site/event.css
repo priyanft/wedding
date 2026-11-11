@@ -1,0 +1,163 @@
+/* Themed event pages. Each theme sets the same tokens; layout is shared. */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root { --title: "Great Vibes", cursive; --body: "Cormorant Garamond", Georgia, serif; --sans: "Montserrat", system-ui, sans-serif; }
+body {
+  min-height: 100vh; overflow-x: hidden; background: var(--bg); color: var(--ink);
+  font-family: var(--body); font-size: 18px; line-height: 1.55;
+}
+a { color: inherit; }
+
+/* ── Themes ───────────────────────────────────────────── */
+.t-haldi {
+  --bg: #FFF8E7; --ink: #6A4527; --muted: #9a7656; --accent: #FF7FA3; --accent2: #43B98C;
+  --card: rgba(255,255,255,.72); --line: rgba(240,170,90,.35);
+  --title: "Pacifico", cursive; --body: "Fredoka", system-ui, sans-serif; --sans: "Fredoka", system-ui, sans-serif;
+}
+.t-sangeet {
+  --bg: #0B0420; --ink: #F6EDFF; --muted: #c6b3e6; --accent: #FF3D9A; --accent2: #FFC94A;
+  --card: rgba(40,14,80,.55); --line: rgba(255,61,154,.35);
+  --title: "Monoton", cursive; --body: "Poppins", system-ui, sans-serif; --sans: "Poppins", system-ui, sans-serif;
+}
+.t-wedding {
+  --bg: #2A070D; --ink: #F7EFE4; --muted: #e2cfae; --accent: #F0D79C; --accent2: #C9A35B;
+  --card: rgba(122,15,30,.35); --line: rgba(201,163,91,.45);
+}
+
+/* ── Fixed decor + particles ──────────────────────────── */
+.decor { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
+main, .topnav { position: relative; z-index: 2; }
+
+/* Haldi: pastel carnival tent stripes, bunting, balloons */
+.t-haldi .decor { background:
+  radial-gradient(60vmax 40vmax at 0% 100%, rgba(201,239,220,.9), transparent 60%),
+  radial-gradient(50vmax 40vmax at 100% 80%, rgba(230,215,255,.8), transparent 60%),
+  radial-gradient(50vmax 30vmax at 100% 0%, rgba(255,210,184,.7), transparent 60%); }
+
+/* Sangeet: club night with sweeping beams, disco ball, equalizer */
+.t-sangeet .decor { background:
+  radial-gradient(70vmax 50vmax at 50% 0%, rgba(123,47,190,.55), transparent 60%),
+  radial-gradient(60vmax 40vmax at 0% 100%, rgba(255,61,154,.25), transparent 60%),
+  radial-gradient(60vmax 40vmax at 100% 100%, rgba(91,224,255,.18), transparent 60%), #0B0420; }
+
+/* Wedding: maroon velvet, marigold toran, mandala, diyas */
+.t-wedding .decor { background:
+  radial-gradient(60vmax 50vmax at 50% 30%, rgba(179,19,43,.45), transparent 65%),
+  repeating-linear-gradient(45deg, rgba(201,163,91,.05) 0 2px, transparent 2px 26px), #2A070D; }
+
+/* ── Nav ──────────────────────────────────────────────── */
+.topnav { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; padding: 70px 16px 0; max-width: 1100px; margin: 0 auto; font-family: var(--sans); font-size: .85rem; }
+.back { text-decoration: none; opacity: .8; }
+.back:hover { opacity: 1; }
+.chips { display: flex; gap: 8px; }
+.chip { text-decoration: none; padding: .35rem .9rem; border-radius: 99px; border: 1px solid var(--line); background: var(--card); backdrop-filter: blur(6px); }
+.chip.on { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+.t-haldi .chip.on { color: #fff; }
+
+/* ── Hero ─────────────────────────────────────────────── */
+main { max-width: 1100px; margin: 0 auto; padding: 0 16px; }
+.ev-hero { text-align: center; padding: 2.5rem 0 3rem; }
+.eyebrow { font-family: var(--sans); text-transform: uppercase; letter-spacing: .3em; font-size: .72rem; color: var(--muted); }
+.ev-title { font-family: var(--title); font-weight: 400; line-height: 1.1; font-size: clamp(3.4rem, 15vw, 7.5rem); margin: .3rem 0 .2rem; animation: pop 1.2s cubic-bezier(.2,1.4,.4,1) both; }
+@keyframes pop { from { opacity: 0; transform: scale(.7) translateY(20px); } }
+.t-haldi .ev-title { color: #F29A2E; text-shadow: 3px 3px 0 #FFD6E2, 6px 6px 0 #C9EFDC; }
+.t-sangeet .ev-title { color: #FFE6F3; font-size: clamp(2.6rem, 12vw, 6.4rem);
+  text-shadow: 0 0 6px #fff, 0 0 18px #FF3D9A, 0 0 42px #FF3D9A, 0 0 80px #7B2FBE; animation: pop 1.2s both, neon 4s 1.2s infinite; }
+@keyframes neon { 0%, 18%, 22%, 62%, 64%, 100% { opacity: 1; } 20%, 63% { opacity: .55; } }
+.t-wedding .ev-title { background: linear-gradient(100deg, #C9A35B 20%, #FFF6DC 45%, #C9A35B 70%); background-size: 250% 100%;
+  -webkit-background-clip: text; background-clip: text; color: transparent; animation: pop 1.2s both, shimmer 6s linear infinite; padding: 0 .15em; }
+@keyframes shimmer { to { background-position: -250% 0; } }
+.tagline { font-size: clamp(1.1rem, 3vw, 1.4rem); font-style: italic; opacity: .9; max-width: 42ch; margin: 0 auto; }
+.t-haldi .tagline, .t-sangeet .tagline { font-style: normal; }
+
+.stage { position: relative; width: min(560px, 92vw); margin: 2rem auto 1rem; }
+.t-haldi .stage { width: min(820px, 94vw); }
+.stage .art { z-index: 1; animation: floaty 6s ease-in-out infinite; }
+.t-wedding .stage .art { aspect-ratio: 1 / 1.05; }
+@keyframes floaty { 50% { transform: translateY(-10px); } }
+.stage .diyas { margin-top: 22px; }
+.t-sangeet .stage::before { content: ""; position: absolute; left: 50%; bottom: -10%; width: 120%; height: 60%; translate: -50% 0;
+  background: radial-gradient(ellipse at 50% 100%, rgba(255,61,154,.55), transparent 70%); filter: blur(10px); }
+
+.when-pill { display: inline-flex; gap: .7rem; align-items: center; margin-top: 1rem; padding: .6rem 1.4rem; border-radius: 99px;
+  background: var(--card); border: 1px solid var(--line); font-family: var(--sans); font-size: 1rem; backdrop-filter: blur(6px); }
+.when-pill b { color: var(--accent); }
+.place { margin-top: .6rem; font-family: var(--sans); font-size: .8rem; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
+
+/* ── Sections ─────────────────────────────────────────── */
+section { padding: 3rem 0; text-align: center; }
+h2 { font-family: var(--title); font-weight: 400; font-size: clamp(2.2rem, 7vw, 3.4rem); margin-bottom: 1.4rem; color: var(--accent); }
+.t-haldi h2 { color: #F08A5D; }
+.t-sangeet h2 { font-size: clamp(1.6rem, 5vw, 2.4rem); color: #FFE6F3; text-shadow: 0 0 12px #FF3D9A; }
+.clock { display: flex; justify-content: center; gap: clamp(.6rem, 3vw, 1.4rem); flex-wrap: wrap; }
+.clock div { min-width: 82px; padding: 1rem .6rem; border-radius: 18px; background: var(--card); border: 1px solid var(--line); backdrop-filter: blur(6px); }
+.t-wedding .clock div { border-radius: 0; }
+.clock b { display: block; font-size: clamp(2rem, 7vw, 3rem); font-weight: 500; line-height: 1; color: var(--accent); }
+.t-haldi .clock b { color: var(--accent2); }
+.clock span { font-family: var(--sans); font-size: .65rem; letter-spacing: .25em; text-transform: uppercase; color: var(--muted); }
+.ev-about p { max-width: 640px; margin: 0 auto; font-size: clamp(1.1rem, 2.6vw, 1.35rem); }
+
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+.card { padding: 1.6rem 1.2rem; border-radius: 22px; background: var(--card); border: 1px solid var(--line); backdrop-filter: blur(8px); transition: transform .3s; }
+.card:hover { transform: translateY(-6px) rotate(-.6deg); }
+.t-haldi .card:nth-child(4n+1) { background: rgba(255,232,154,.6); }
+.t-haldi .card:nth-child(4n+2) { background: rgba(255,210,184,.6); }
+.t-haldi .card:nth-child(4n+3) { background: rgba(201,239,220,.7); }
+.t-haldi .card:nth-child(4n+4) { background: rgba(230,215,255,.7); }
+.t-sangeet .card { box-shadow: 0 0 0 1px rgba(255,61,154,.2), 0 10px 40px rgba(123,47,190,.35); }
+.t-wedding .card { border-radius: 0; position: relative; }
+.t-wedding .topnav { padding-top: 112px; }
+.t-wedding .card::before { content: ""; position: absolute; inset: 6px; border: 1px solid rgba(240,215,156,.25); pointer-events: none; }
+.ico { font-size: 2.2rem; display: block; margin-bottom: .4rem; }
+.card h3 { font-family: var(--sans); font-size: 1.05rem; font-weight: 600; margin-bottom: .3rem; }
+.t-wedding .card h3 { font-family: var(--body); font-size: 1.45rem; font-weight: 600; color: var(--accent); }
+.card p { font-size: 1rem; opacity: .85; }
+
+.dress { font-size: 1.25rem; margin-bottom: 1rem; }
+.swatches { display: flex; justify-content: center; gap: 10px; }
+.swatches i { width: 46px; height: 46px; border-radius: 50%; border: 3px solid rgba(255,255,255,.7); box-shadow: 0 6px 16px rgba(0,0,0,.18); }
+
+.ev-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: .8rem; }
+.btn { font-family: var(--sans); font-size: .8rem; letter-spacing: .18em; text-transform: uppercase; text-decoration: none;
+  padding: .95rem 1.6rem; border: 1px solid var(--accent); color: var(--ink); border-radius: 99px; transition: background .3s, color .3s, transform .3s; }
+.btn:hover, .btn.solid { background: var(--accent); color: var(--bg); }
+.btn:hover { transform: translateY(-2px); }
+.t-haldi .btn { border-color: #F08A5D; }
+.t-haldi .btn:hover, .t-haldi .btn.solid { background: #F08A5D; color: #fff; }
+.t-wedding .btn { border-radius: 0; }
+
+.next-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; }
+.next { display: flex; align-items: center; gap: 1rem; text-align: left; text-decoration: none; padding: 1rem 1.2rem; border-radius: 22px; color: #fff; transition: transform .3s; overflow: hidden; }
+.next:hover { transform: translateY(-4px); }
+.next .mini { width: 120px; height: 120px; flex: none; border-radius: 16px; overflow: hidden; }
+.next .mini img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%; }
+.next h3 { font-size: 1.8rem; font-weight: 400; }
+.next p { font-family: var(--sans); font-size: .8rem; opacity: .85; }
+.next span { font-family: var(--sans); font-size: .75rem; letter-spacing: .15em; text-transform: uppercase; }
+.t-haldi-card { background: linear-gradient(135deg, #FFE89A, #FFD2B8 55%, #C9EFDC); color: #6A4527; }
+.t-haldi-card h3 { font-family: "Pacifico", cursive; color: #F29A2E; }
+.t-sangeet-card { background: radial-gradient(circle at 20% 0%, #7B2FBE, #2A0F4F 60%, #0B0420); }
+.t-sangeet-card h3 { font-family: "Monoton", cursive; font-size: 1.5rem; text-shadow: 0 0 10px #FF3D9A; }
+.t-wedding-card { background: radial-gradient(circle at 20% 0%, #B3132B, #4a0a14 70%); border: 1px solid rgba(201,163,91,.5); }
+.t-wedding-card h3 { font-family: "Great Vibes", cursive; font-size: 2.4rem; color: #F0D79C; }
+
+.ev-foot { text-align: center; padding: 3rem 0 5rem; font-family: var(--sans); letter-spacing: .3em; color: var(--muted); font-size: .8rem; }
+
+/* reveal */
+.reveal { opacity: 0; transform: translateY(26px); transition: opacity .9s ease, transform .9s cubic-bezier(.2,.8,.2,1); transition-delay: calc(var(--k, 0) * 90ms); }
+.reveal.in { opacity: 1; transform: none; }
+
+@media (max-width: 560px) {
+  .topnav { justify-content: center; padding-top: 64px; }
+  .t-sangeet .topnav { padding-top: 124px; }
+  .t-wedding .topnav { padding-top: 104px; }
+  .clock { flex-wrap: nowrap; gap: 8px; }
+  .clock div { min-width: 0; flex: 1; max-width: 82px; padding: .8rem .2rem; }
+  .clock span { letter-spacing: .12em; }
+  .next .mini { width: 92px; height: 92px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .reveal { opacity: 1; transform: none; }
+  #fx { display: none; }
+}
