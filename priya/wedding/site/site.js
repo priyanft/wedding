@@ -43,8 +43,7 @@
   });
 
   // ── Wedding weekend timeline ─────────────────────────────
-  const days = [...new Set(W.events.map(e => e.when))];
-  const dayName = e => ["Day One", "Day Two", "Day Three"][days.indexOf(e.when)] || e.when;
+  const dayName = e => e.when;
   const partOfDay = e => { const h = +new Date(e.start).toLocaleString("en-GB", { hour: "numeric", hour12: false, timeZone: "Asia/Kolkata" });
     return h < 12 ? "Morning" : h < 17 ? "Afternoon" : "Evening"; };
   $(".tl-stops").innerHTML = W.events.map(e => `
@@ -90,11 +89,6 @@
   dots.innerHTML = W.events.map(e => `<a href="#cele-${e.slug}" data-s="${e.slug}"><span>${e.name}</span></a>`).join("");
   document.body.append(dots);
 
-  // ── Good to know ────────────────────────────────────────
-  $(".faq").innerHTML = (W.faq || []).map(f =>
-    `<details><summary>${f.q}<i aria-hidden="true"></i></summary><p>${f.a}</p></details>`).join("");
-  if (!(W.faq || []).length) $("#know").remove();
-
   // ── Share hashtag ───────────────────────────────────────
   $(".share-tag").addEventListener("click", e => {
     const small = $("small", e.currentTarget);
@@ -108,17 +102,7 @@
   $(".venue-addr").textContent = W.venue.address;
   $("#venue iframe").src = W.venue.mapEmbed;
   $("#directions").href = W.venue.mapsUrl;
-  $(".rsvp-note").textContent = `Kindly respond by ${W.rsvp.deadline}`;
 
-  // ── RSVP → WhatsApp (no server needed) ──────────────────
-  $("#rsvp-form").addEventListener("submit", e => {
-    e.preventDefault();
-    const d = Object.fromEntries(new FormData(e.target));
-    const msg = `RSVP for ${W.bride} & ${W.groom}'s wedding\n` +
-      `Name: ${d.name}\nResponse: ${d.coming}\nGuests: ${d.guests}` +
-      (d.note ? `\nWish: ${d.note}` : "");
-    window.open(`https://wa.me/${W.rsvp.whatsapp}?text=${encodeURIComponent(msg)}`, "_blank");
-  });
 
   // ── Countdown ───────────────────────────────────────────
   const target = new Date(W.date).getTime();

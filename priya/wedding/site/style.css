@@ -184,6 +184,7 @@ h2 {
 /* hover uses `translate` so it never fights GSAP, which animates `transform` */
 .cele-expect li { display: flex; gap: .7rem; align-items: flex-start; padding: .9rem; border-radius: 16px; background: var(--chip); border: 1px solid var(--line); transition: translate .3s; }
 .cele-expect li:hover { translate: 0 -4px; }
+.cele-expect li:last-child:nth-child(odd) { grid-column: 1 / -1; }
 .cele-expect .ico { font-size: 1.6rem; line-height: 1; }
 .cele-expect strong { display: block; font-family: var(--sans); font-size: .82rem; font-weight: 600; margin-bottom: .15rem; }
 .cele-expect li span:not(.ico) { font-size: .95rem; line-height: 1.4; opacity: .85; }

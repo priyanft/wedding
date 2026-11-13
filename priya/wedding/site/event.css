@@ -98,6 +98,8 @@ h2 { font-family: var(--title); font-weight: 400; font-size: clamp(2.2rem, 7vw, 
 .ev-about p { max-width: 640px; margin: 0 auto; font-size: clamp(1.1rem, 2.6vw, 1.35rem); }
 
 .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+.cards:has(> .card:nth-child(3):last-child) { grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 760px) { .cards:has(> .card:nth-child(3):last-child) { grid-template-columns: 1fr; } }
 .card { padding: 1.6rem 1.2rem; border-radius: 22px; background: var(--card); border: 1px solid var(--line); backdrop-filter: blur(8px); transition: transform .3s; }
 .card:hover { transform: translateY(-6px) rotate(-.6deg); }
 .t-haldi .card:nth-child(4n+1) { background: rgba(255,232,154,.6); }
